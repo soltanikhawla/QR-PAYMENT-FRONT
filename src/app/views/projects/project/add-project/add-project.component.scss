@@ -1,0 +1,13 @@
+.readonly-input {
+    background-color: #ccc; /* Couleur grise */
+    cursor: not-allowed;   /* Curseur en forme de non autorisé */
+    pointer-events: none;  /* Empêche les interactions de clic */
+  }
+  .btn {
+    background: #a8ba6d;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }

@@ -1,0 +1,87 @@
+<c-row>
+  <c-col xs="12">
+  </c-col>
+  <c-col xs="12">
+    <c-card class="mb-3">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Actors</strong>
+      </c-card-header>
+      <c-card-body>
+        <c-nav variant="tabs">
+          <c-nav-item>
+            <a [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="0" cNavLink [class.active-tab]="tabContent1.activeTabPaneIdx === 0" style="color: rgb(159, 153, 153);">
+              <svg cIcon class="me-2" name="cilHome"></svg>
+            List of Actors
+            </a>
+          </c-nav-item>
+          <c-nav-item>
+            <a [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="1" cNavLink [class.active-tab]="tabContent1.activeTabPaneIdx === 1" style="color: rgb(159, 153, 153);">
+              <svg cIcon class="me-2" name="cilUser"></svg>
+          Add actors
+            </a>
+          </c-nav-item>
+        </c-nav>
+        <c-tab-content #tabContent1="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
+          <c-tab-pane class="p-3 preview" role="tabpanel">
+           <table [hover]="true" cTable>
+            <thead>
+            <tr>
+             <th scope="col">First Name</th>
+             <th scope="col">Last Name</th>
+             <th scope="col">Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let list of listActor">
+             <td>{{list.first_name}}</td>
+             <td>{{list.last_name}}</td>
+             <td>{{list.role}}</td>
+           </tbody>
+           </table>
+          </c-tab-pane>
+          <c-tab-pane class="p-3 preview" role="tabpanel">
+            <form cForm class="row g-3" [formGroup]="saveForm" (ngSubmit)="savingData(saveForm)">
+              <c-col md="6">
+                <label cLabel for="first_Name">First Name</label>
+                <input cFormControl id="first_Name" type="text" formControlName="first_name" [(ngModel)]="first_name" />
+                <div *ngIf="submitted && saveForm.get('first_name')?.hasError('required')" class="text-danger">
+                  Actor Name is required.
+                </div>
+              </c-col>
+              <c-col md="6">
+                <label cLabel for="date_Creation">Last Name</label>
+                <input type="text"  class="form-control" formControlName="last_name" [(ngModel)]="last_name">
+              </c-col>
+
+              <c-col md="6">
+                <label cLabel for="email">Email</label>
+                <input cFormControl id="email" type="email"  formControlName="email" [(ngModel)]="email" />
+               <div *ngIf="submitted && saveForm.get('email')?.hasError('required')" class="text-danger">
+                  Email is required.
+                </div> 
+              </c-col>
+
+              <c-col md="6">
+                <label cLabel for="inputState">Role</label>
+                <select cSelect id="inputState" class="form-control" formControlName="role" [(ngModel)]="role">
+                  <option>MOE</option>
+                  <option>MOA</option>
+                  <option>ExpertT</option>
+                  <option>ExpertM</option>
+                </select>
+              </c-col>
+              <c-col xs="12">
+                <button class="btn" type="submit" style="background-color: #c2d28e;">Create Actor</button>
+              </c-col>
+            </form>
+          </c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12">
+  </c-col>
+</c-row>
+
+
+    

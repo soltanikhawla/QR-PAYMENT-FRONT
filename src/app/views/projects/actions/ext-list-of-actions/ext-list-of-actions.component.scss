@@ -1,0 +1,23 @@
+.scrollB {
+    max-height: 800px; 
+    overflow-x: auto; 
+    overflow-y: auto; 
+  }
+  table {
+    width: 100%; 
+    border-collapse: collapse; 
+  }
+  
+  table thead {
+    position: sticky;
+    top: 0; 
+    background-color: #fff; 
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 175px; 
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}

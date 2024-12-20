@@ -1,0 +1,188 @@
+<!--<c-header class="mb-4 d-print-none" position="sticky">-->
+<ng-container>
+  <c-container [fluid]="true">
+    <button
+      toggle="visible"
+      cHeaderToggler
+      [cSidebarToggle]="sidebarId"
+      class="ps-1"
+    >
+      <svg cIcon
+      name="cilMenu"
+      size="lg"
+      style="color:  #94a94c; stroke: #94a94c; stroke-width: 2; "
+    ></svg>
+    </button>
+    <c-header-nav class="d-none d-lg-flex me-auto">
+      <c-nav-item>
+        <a cNavLink routerLink="/dashboard" routerLinkActive="active" style="color:#94a94c; font-size:15px;">
+        <span>Dashboard</span>
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <!-- <a cNavLink routerLink="/users" routerLinkActive="active">Users</a> -->
+      </c-nav-item>
+      <c-nav-item>
+        <!-- <a cNavLink routerLink="/settings" routerLinkActive="active">
+          Settings
+        </a> -->
+      </c-nav-item>
+    </c-header-nav>
+
+    <c-header-nav class="d-none d-lg-flex">
+      <c-nav-item>
+        <!-- <a routerLink="./" cNavLink>
+          <svg cIcon name="cilBell" size="lg"></svg>
+        </a> --> {{name}}
+      </c-nav-item>
+      <!-- <c-nav-item>
+        <a routerLink="./" cNavLink>
+          <svg cIcon name="cilList" size="lg"></svg>
+        </a>
+      </c-nav-item> -->
+      <!-- <c-nav-item>
+        <a routerLink="./" cNavLink>
+          <svg cIcon name="cilEnvelopeOpen" size="lg"></svg>
+        </a>
+      </c-nav-item> -->
+    </c-header-nav>
+    <c-header-nav class="ms-3">
+      <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+    </c-header-nav>
+  </c-container>
+  <c-header-divider *ngIf="isAddProjectRoute()" ></c-header-divider>
+  <c-container [fluid]="true" *ngIf="isAddProjectRoute()">
+    <!-- <mat-icon (click)="toggleSourceTable()"> table_chart</mat-icon> -->
+     
+   <button *ngIf="activePage === 'mapping'" type="button" class="sourceTargetBtn" (click)="toggleSourceTable()">Source files</button>
+   <div></div>
+   <b style="font-size: 15px;">{{ ProjectName }}</b>
+   <!-- <mat-icon (click)="toggleTargetTable()">table_chart</mat-icon> -->
+   <div></div>
+   <button  *ngIf="activePage === 'mapping'" type="button" class="sourceTargetBtn" (click)="toggleTargetTable()">Target files</button>
+    <!-- <c-breadcrumb-router class="ms-2"></c-breadcrumb-router> -->
+  </c-container>
+  <c-header-divider *ngIf="isAddProjectRoute()"></c-header-divider>
+  <c-container [fluid]="true" *ngIf="isAddProjectRoute()">
+    <div class="Name">  
+    
+      <!-- <a  class="add-actor-link" (click)="gotoFiles()" [ngClass]="{ selected: activePage === 'files' }" >Files</a>
+      <a class="add-actor-link" (click)="gotoaddActor()" [ngClass]="{ selected: activePage === 'add-actor' }" >Actor</a>
+      <a class="add-actor-link" [ngClass]="{ selected: activePageEdit === 'edit-project' }">Edit</a>-->
+         <a *ngIf="isEditRoute()" class="add-actor-link" (click)="gotoaddActor()" [ngClass]="{ selected: activePage === 'add-actor' }"><button class="btn b">Actors</button></a>
+         <a *ngIf="isEditRoute()" class="add-actor-link" (click)="gotoFiles()" [ngClass]="{ selected: activePage === 'files' }"><button class="btn b">Files</button></a>
+         <a class="add-actor-link" (click)="gotoMapping()" [ngClass]="{ selected: activePage === 'mapping' }" ><button class="btn b">Mapping</button></a>
+         <a class="add-actor-link" (click)="gotoActions()" [ngClass]="{ selected: activePage === 'actions' }" ><button class="btn b">Actions</button></a>
+         <a class="add-actor-link" (click)="gotoWorkshops()" [ngClass]="{ selected: activePage === 'workshops' }" ><button class="btn b">Workshops</button></a>
+         <a class="add-actor-link" (click)="gotoRules()" [ngClass]="{ selected: activePage === 'rules' }" ><button class="btn b">Rules</button></a>
+        </div>
+  </c-container>
+</ng-container>
+<!--</c-header>-->
+
+<ng-template #userDropdown>
+  <c-dropdown alignment="end" variant="nav-item">
+    <button
+      cButton
+      color=""
+      [caret]="false"
+      cDropdownToggle
+      class="py-0"
+    >
+      <c-avatar
+        cTextColor="primary"
+        shape="rounded-1"
+        size="md"
+        src="./assets/img/brand/Avatar.png"
+        status="success"
+      >
+      </c-avatar>
+    </button>
+    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+       <!-- <li>
+        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
+      </li> -->
+      <!-- <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilBell"></svg>
+          
+          <c-badge class="ms-2 float-end" color="info">
+           
+          </c-badge>
+        </a>
+      </li> -->
+      <!-- <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilEnvelopeOpen"></svg>
+        
+          <c-badge class="ms-2 float-end" color="success">
+          
+          </c-badge>
+        </a>
+      </li> -->
+      <!-- <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilTask"></svg>
+        
+          <c-badge class="ms-2 float-end" color="danger">
+           
+          </c-badge>
+        </a>
+      </li> -->
+      <!-- <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name='cilCommentSquare'></svg>
+         
+          <c-badge class="ms-auto" color="warning">
+           
+          </c-badge>
+        </a>
+      </li> -->
+      <li>
+        <h6 cDropdownHeader class="bg-light fw-semibold py-2">Account</h6>
+      </li>
+      <li></li>
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilUser"></svg>
+         Profile
+        </a>
+      </li>
+      <!-- <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilSettings"></svg>
+         
+        </a>
+      </li> -->
+      <!-- <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilCreditCard"></svg>
+        
+          <c-badge class="ms-2 float-end" color="secondary">
+            
+          </c-badge>
+        </a>
+      </li> -->
+      <!-- <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilFile"></svg>
+        
+          <c-badge class="ms-2 float-end" color="primary">
+         
+          </c-badge>
+        </a>
+      </li> -->
+      <li>
+        <hr cDropdownDivider/>
+      </li> 
+      <li>
+        <a routerLink="./" cDropdownItem>
+          <svg cIcon class="me-2" name="cilLockLocked"></svg>
+         Log out
+        </a>
+      </li>
+      <li></li>
+    </ul>
+  </c-dropdown>
+</ng-template>
+

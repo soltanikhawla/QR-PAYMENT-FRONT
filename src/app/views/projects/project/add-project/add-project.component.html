@@ -1,0 +1,46 @@
+<c-row>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>New Project</strong>
+      </c-card-header>
+      <c-card-body>
+          <form cForm class="row g-3" [formGroup]="saveForm" (ngSubmit)="savingData(saveForm)">
+            <c-col md="6">
+              <label cLabel for="project_Name">Project Name</label>
+              <input cFormControl id="project_Name" type="text" formControlName="project_Name" [(ngModel)]="project_Name"/>
+              <div *ngIf="submitted && saveForm.get('project_Name')?.hasError('required')" class="text-danger">
+                Project Name is required.
+              </div>
+            </c-col>
+            <c-col md="2">
+              <label cLabel for="date_Creation">Date</label>
+              <input type="date" placeholder="date_Creation" class="form-control" formControlName="date_Creation" [(ngModel)]="date_Creation">
+              <div *ngIf="submitted && saveForm.get('date_Creation')?.hasError('required')" class="text-danger">
+                Date is required.
+              </div>
+            </c-col>
+            <c-col md="6">
+              <label cLabel for="inputState">Status</label>
+              <select cSelect id="inputState" class="form-control" formControlName="status" [(ngModel)]="status">
+                <option>Draft</option>
+                <option>In progress</option>
+                <option>Closed</option>
+              </select>
+              <div *ngIf="submitted && saveForm.get('status')?.hasError('required')" class="text-danger">
+                Status is required.
+              </div>
+            </c-col>
+            <c-col md="6">
+              <label cLabel for="Version">Version</label>
+              <input cFormControl id="Version" formControlName="version" [value]="version" readonly/>
+            </c-col>
+            <c-col xs="12">
+              <button type="submit" class="btn" style="background-color:#a8ba6d">Create Project</button>
+            </c-col>
+          </form>
+        
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

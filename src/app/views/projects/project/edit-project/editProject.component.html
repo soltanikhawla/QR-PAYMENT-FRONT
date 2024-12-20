@@ -1,0 +1,207 @@
+<c-row>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Edit Project</strong>
+      </c-card-header>
+      <c-card-body>
+          <form cForm class="row g-3" [formGroup]="saveForm">
+            <c-col md="6">
+              <label cLabel for="project_Name">Project Name</label>
+              <input *ngIf="project" id="project_Name" type="text"  class="form-control" formControlName="project_Name" [(ngModel)]="project.project_Name" />
+            </c-col>
+            <c-col md="6">
+              <label cLabel for="inputState">Status</label>
+              <select *ngIf="project" cSelect id="inputState" class="form-control" formControlName="status" [(ngModel)]="project.status">
+                <option>Draft</option>
+                <option>In progress</option>
+                <option>Closed</option>
+              </select>
+            </c-col>
+            <c-col md="6">
+              <label cLabel for="Version">Version</label>
+              <input *ngIf="project" id="Version" formControlName="version" class="form-control" [(ngModel)]="project.version" readonly/>
+            </c-col>
+          </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+<br>
+<app-add-actor></app-add-actor>
+          <!-- ****************************Actions list ******************************************** -->
+<c-col xs="12">
+  <c-card class="mb-4">
+   <c-card-header>
+    <strong>List of Actions</strong>
+   </c-card-header>
+   <c-card-body>
+     <table [hover]="true" cTable>
+      <thead>
+      <tr>
+       <th scope="col">ID Action</th>
+       <th scope="col">Action</th>
+       <th scope="col">Actor</th>
+       <th scope="col">Date Creation</th>
+       <th scope="col">Due Date</th>
+       <th scope="col">External reference</th>
+       <th scope="col">Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let list of listAction">
+          <td>{{list.id_Action}}</td>
+          <td>{{list.action}}</td>
+          <td>{{list.actor.first_name}}</td>
+          <td>{{list.creation_Date | date: 'mediumDate'}}</td>
+          <td>{{list.end_Date | date: 'mediumDate'}}</td>
+          <td>{{list.external_ref}}</td>
+          <td>{{list.status}}</td>
+      </tr>
+
+      </tbody>
+     </table>
+   </c-card-body>
+  </c-card>
+ </c-col>
+ <!--****************************************************************************************************-->
+<c-col xs="12">
+  <c-card class="mb-8">
+    <c-card-header ngPreserveWhitespaces>
+      <strong>Files</strong>
+    </c-card-header>
+    <c-card-body>
+      <div class="row ">
+          <!-- ****************************source File******************************************** -->
+
+        <div class="col-md-6">
+          <label>
+            <h2>Source File</h2>
+            </label>
+            <div id="checkboxContainer">
+            <div class="custom-scroll-table">
+            <table>
+              <thead>
+                <tr>
+                  <th class="d-flex justify-content-between align-items-center">
+                    <span>Item</span>
+                    <div class="search-container">
+                      <div class="d-flex">
+                        <div class="col-md-6">
+                          <div class="form">
+                            <i class="bi bi-search"></i>
+                            <input type="text" class="form-control form-input" [(ngModel)]="searchQueryS" (input)="onSearchS()" placeholder="Search source file ...">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
+                   <th>Select</th>
+               </tr>
+             </thead>
+              <tbody>
+               <tr *ngFor="let itemObj of itemSource; let i = index">
+                  <td>
+                      {{ itemObj.item }}
+                  </td>
+                  <td>
+                      <input type="checkbox" [(ngModel)]="itemObj.checked" (change)="toggleItemSelectionS(itemObj)" />
+                  </td>
+               </tr>
+              </tbody>
+            </table>
+         </div>
+             <br>
+      </div>
+      <div class="custom-scroll-table">
+            <table>
+              <thead>
+                <tr>
+                  <th> <span><mat-icon>playlist_add</mat-icon >Add to existing List </span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let selectedItem of selectedItemS">
+                  <td>{{ selectedItem }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <!-- ****************************Target File******************************************** -->
+      <div class="col-md-6">
+        <label>
+          <h2>Target File</h2>
+          </label>
+          <div id="checkboxContainer">
+          <div class="custom-scroll-table">
+          <table>
+            <thead>
+              <tr>
+                <th class="d-flex justify-content-between align-items-center">
+                  <span>Item</span>
+                  <div class="search-container">
+                    <div class="d-flex">
+                      <div class="col-md-6">
+                        <div class="form">
+                          <i class="bi bi-search"></i>
+                          <input type="text" class="form-control form-input" [(ngModel)]="searchQueryC" (input)="onSearchC()" placeholder="Search target file ...">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </th>
+                 <th>Select</th>
+             </tr>
+           </thead>
+            <tbody>
+             <tr *ngFor="let itemObj of itemCible; let i = index">
+                <td>
+                    {{ itemObj.item }}
+                </td>
+                <td>
+                    <input type="checkbox" [(ngModel)]="itemObj.checked" (change)="toggleItemSelectionC(itemObj)" />
+                </td>
+             </tr>
+            </tbody>
+          </table>
+       </div>
+           <br>
+    </div>
+    <div class="custom-scroll-table">
+          <table>
+            <thead>
+              <tr>
+                <th> <span><mat-icon>playlist_add</mat-icon >Add to existing List </span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let selectedItem of selectedItemC">
+                <td>{{ selectedItem }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+    <br>
+    <button class="btn" (click)="ButtonFunction()" style=" float:right; background-color: #c2d28e;" >Update Project</button>
+</c-card-body>
+</c-card>
+</c-col>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

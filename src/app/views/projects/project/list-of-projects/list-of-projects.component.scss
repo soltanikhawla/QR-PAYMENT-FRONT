@@ -1,0 +1,68 @@
+:host {
+  #exampleColorInput {
+    min-width: 2.5rem;
+  }
+  .color-box {
+    min-width: 2rem;
+    min-height: 2rem;
+  }
+}
+table button {
+  /*background-color: #7bbaff;*/
+  // border-bottom: #7ea0af;
+   padding: 5px 10px;
+   margin-right: 5px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   background-color: white;
+ }
+ .example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+.filter-field {
+  width: 100%;
+  max-width: 200px; /* Ajustez la largeur maximale selon vos besoins */
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.mat-header-cell {
+  position: relative;
+}
+
+.mat-header-cell .filter-field {
+  position: absolute;
+  bottom: -30px; /* Ajustez la position verticale sous l'en-tête */
+}
+
+.container {
+  margin: 20px;
+}
+
+.filters {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-select, .mat-column-name, .mat-column-country, .mat-column-representative, .mat-column-date, .mat-column-status, .mat-column-activity {
+  padding: 16px;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.filters-row th {
+  padding: 4px;
+}
+
+.filters-row th input {
+  width: 100%;
+  box-sizing: border-box;
+}

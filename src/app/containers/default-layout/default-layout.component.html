@@ -1,0 +1,123 @@
+<!--sidebar-->
+<c-sidebar
+  #sidebar="cSidebar"
+  class="d-print-none sidebar sidebar-fixed"
+  id="sidebar"
+  [ngClass]="{ 'sidebar-narrow': isSidebarNarrow }"
+  visible
+  style="background-image: url('assets/img/brand/sidebar-2-copie.jpg');
+  background-size: cover;
+  background-position: center center;
+  backdrop-filter: blur(15px);"
+>
+<!--Image logo-->
+  <!-- <c-sidebar-brand
+    [brandFull]="{
+      src: 'assets/img/brand/teamwill.png', 
+      width: 180,
+      height: 50,
+      alt: '  Teamwill Logo'
+
+    }"
+    [brandNarrow]="{
+      src: 'assets/img/brand/logoTeamwill.jpg', 
+      width: 46,
+      height: 46,
+      alt: 'Teamwill Logo'
+    }" 
+    style="background-color:whitesmoke;"
+  > -->
+  <!-- </c-sidebar-brand> -->
+  <!-- <perfect-scrollbar [config]="perfectScrollbarConfig" style="backdrop-filter: blur(5px);"> -->
+  <!--  [perfectScrollbar]="perfectScrollbarConfig"-->
+  <!-- <b><c-sidebar-nav
+    [navItems]="navItems"
+    dropdownMode="close"
+  >
+  </c-sidebar-nav></b> -->
+  <!-- <div class="divider" style="background-color: rgb(255, 255, 255);"></div> -->
+  <perfect-scrollbar [config]="perfectScrollbarConfig" style="backdrop-filter: blur(5px);">
+    <c-sidebar-nav>
+      <h4 class="name">QR Payment </h4>
+      <div class="divider" style="background-color: rgb(255, 255, 255);"></div>
+      <div class="side-bar">
+        <div class="menu">
+          <div class="item">
+            <a routerLink="/dashboard">
+             <mat-icon>dashboard</mat-icon>
+             <span class="menu-text">Dashboard</span>
+          </a>
+          </div>
+          <div class="item">
+            <a class="sub-btn" (click)="toggleSubMenu1(subMenu)">
+              <mat-icon > <i class="bi bi-qr-code"></i></mat-icon>
+           
+              <span class="menu-text" >Recevoir paiement</span>
+              <mat-icon class="dropdown">{{ isSubMenuOpen1 ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</mat-icon>
+            </a>
+            <div class="sub-menu" #subMenu [ngClass]="{ 'open': isSubMenuOpen1}">
+             <a routerLink="/projects/generateQRCode" class="sub-item"> Générer un QR code</a>
+             <a routerLink="/projects/HistoriquePayment" class="sub-item">Historique</a>
+              <!-- <a routerLink="/files/mapping-file" class="sub-item">Mapping Files</a>
+              <a routerLink="/files/list-of-files" class="sub-item">List of Files</a>  -->
+            </div>
+          </div>
+          <div class="item">
+            <a class="sub-btn" (click)="toggleSubMenu2(subMenu2)">
+              <mat-icon>Support</mat-icon>
+              <span class="menu-text">Support</span>
+              <mat-icon class="dropdown">{{ isSubMenuOpen2 ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</mat-icon>
+            </a>
+            <div class="sub-menu" #subMenu2 [ngClass]="{ 'open': isSubMenuOpen2 }">
+               <a routerLink="/projects/list-of-projects" class="sub-item">FAQ</a>
+             <!-- <a routerLink="/projects/list-of-actors" class="sub-item">List of Actors</a>
+              <a routerLink="/projects/ext-list-of-actions" class="sub-item">List of Actions</a>
+              <a routerLink="/projects/add-project" class="sub-item">Add Project</a> -->
+            </div>
+          </div>
+          <div class="item">
+            <a class="sub-btn" (click)="toggleSubMenu3(subMenu3)">
+              <mat-icon>import_contacts</mat-icon><span class="menu-text">Réglementations</span>
+              <mat-icon class="dropdown">{{ isSubMenuOpen3 ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</mat-icon>
+            </a>
+            <div class="sub-menu" #subMenu3 [ngClass]="{ 'open': isSubMenuOpen3 }">
+              <a routerLink="/projects/transco" class="sub-item"> Condition d'utilisation</a>
+            </div>
+          </div>
+          <div class="item">
+            <a class="sub-btn" (click)="toggleSubMenu4(subMenu4)">
+              <mat-icon>account_circle</mat-icon><span class="menu-text">Users</span>
+              <mat-icon class="dropdown">{{ isSubMenuOpen4 ? 'keyboard_arrow_down' : 'keyboard_arrow_right' }}</mat-icon>
+            </a>
+            <div class="sub-menu" #subMenu4 [ngClass]="{ 'open': isSubMenuOpen4 }">
+              <a routerLink="/projects//add-user" class="sub-item">Add User</a>
+              <a routerLink="/projects/list-of-users" class="sub-item">List of users</a>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </c-sidebar-nav>
+  </perfect-scrollbar>
+  <c-sidebar-toggler
+    *ngIf="!sidebar.narrow"
+    toggle="unfoldable"
+    cSidebarToggle="sidebar"
+    style="background-color:transparent;"
+    (click)="toggleSidebar()"
+  ></c-sidebar-toggler>
+</c-sidebar>
+
+<!--main-->
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+  <!--app-header-->
+  <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"></app-default-header><!--style="background: linear-gradient(to right, #2b2b2f , #94a94c);"-->
+  <!--app-body-->
+  <div class="body flex-grow-1 px-3">
+   
+      <router-outlet></router-outlet>
+   
+  </div>
+  <!--app footer-->
+  <app-default-footer></app-default-footer>
+</div>

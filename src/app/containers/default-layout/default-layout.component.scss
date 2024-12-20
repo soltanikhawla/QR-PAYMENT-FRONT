@@ -1,0 +1,78 @@
+
+c-sidebar-nav {
+  backdrop-filter: blur(15px);
+}
+.side-bar .menu {
+  width: 100%;
+  margin-top: 30px;
+  
+}
+.side-bar .menu .item a{
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  padding: 5px 30px;
+  line-height: 50px;
+}
+.side-bar .menu .item a:hover{
+  background: #ffffff;
+  background: rgba(98, 95, 95, 0.771);
+  transition: 0.3s ease;
+}
+.side-bar .menu .item mat-icon{
+ margin-right: 15px;
+}
+.side-bar .menu .item a .dropdown{
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  transition: 0.3 ease;
+}
+.side-bar .menu .item .sub-menu {
+background: rgba(225, 225, 225, 0.1);
+display: none;
+}
+.side-bar .menu .item .sub-menu a {
+  padding-left: 80px;
+}
+.divider{
+  content: '';
+  position: relative;
+  height: 1px;
+  left: 15px;
+  width: calc(100% - 30px);
+  background-color: rgba(231, 31, 31, 0.5);
+}
+.name {
+  font-weight: normal;
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.sidebar.sidebar-narrow {
+  width: 60px; 
+
+}
+
+.sidebar.sidebar-narrow .name,
+.sidebar.sidebar-narrow .divider,
+.sidebar.sidebar-narrow .menu-text,
+.sidebar.sidebar-narrow .sub-menu,
+.sidebar.sidebar-narrow .side-bar .item .dropdown{
+  display: none; /* Hide text elements and submenus */
+}
+
+.sidebar.sidebar-narrow .side-bar .item mat-icon {
+  display: flex; /* Ensure icons are displayed */
+  margin: auto;
+  padding-block: 30px;
+
+}
+
+.sidebar.sidebar-narrow .side-bar .item {
+  text-align: center;
+  pointer-events: none;
+  margin-left: -10px;
+}

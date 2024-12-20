@@ -1,0 +1,58 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+     <c-card-header>
+      <strong>Source File</strong>
+     </c-card-header>
+     <c-card-body>
+      <div class="scrollB">
+       <table [hover]="true" cTable>
+        <thead>
+        <tr>
+         <th scope="col">File Name</th>
+
+         <th scope="col"></th>
+         <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of ItemS">
+         <td>{{ item.fileName }}</td>
+         <td><mat-icon  (click)="navigateToPage(item.fileName)"mat-icon-button title="list" >list_alt</mat-icon></td>
+         <td col-sm-12><mat-icon (click)="deleteSourceFile(item.fileName)" mat-icon-button  title="delete">delete_forever</mat-icon></td> 
+        </tr>
+        </tbody>
+       </table>
+      </div>
+     </c-card-body>
+    </c-card>
+   </c-col>
+ <c-col xs="12">
+    <c-card class="mb-4">
+     <c-card-header>
+      <strong>Target File</strong>
+     </c-card-header>
+     <c-card-body>
+       <div class="custom-scroll-table">
+        <div class="scrollB">
+          <table [hover]="true" cTable>
+            <thead>
+              <tr>
+                <th scope="col">File Name</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of ItemC">
+                <td class="fixed-column">{{ item.fileName }}</td>
+                <td><mat-icon  (click)="navigateToPage(item.fileName)" mat-icon-button title="list">list_alt</mat-icon></td>
+                <td><mat-icon (click)="deleteCibleFile(item.fileName)" mat-icon-button title="delete">delete_forever</mat-icon></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+     </c-card-body>
+    </c-card>
+   </c-col>

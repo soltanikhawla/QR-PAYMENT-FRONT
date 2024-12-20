@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+// If you want to override variables do it here
+@import "variables";
+
+$enable-ltr: true;
+$enable-rtl: true;
+
+// Import styles with default layout.
+@import "@coreui/coreui/scss/coreui";
+
+// Import Chart.js custom tooltips styles
+@import "@coreui/chartjs/scss/coreui-chartjs";
+
+// perfect scrollbar theming for use with [perfectScrollbar] directive
+//@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+@import "layout";
+
+// Some temp fixes
+@import "fixes";
+
+// Prism.js
+@import "examples";
+
+// If you want to add something do it here
+@import "custom";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* src/scss/toastr-custom.scss */
+.custom-toast-warning {
+    background-color: #c2d28e !important; // Change to your desired color
+    color: #fffbfb !important; // Change to your desired text color
+  }
+  
+  .custom-toast-warning .toast-close-button {
+    color: #fbf7f7 !important;
+  }
+  
+//   .toast-container .custom-toast-warning {
+//     background-color: #62d730 !important;
+//     color: #fbfbfb !important;
+//   }
+  
+//   .toast-container .custom-toast-warning .toast-close-button {
+//     color: #f9eeee !important;
+//   }

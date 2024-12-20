@@ -1,0 +1,111 @@
+<c-col xs="12">
+    <c-card class="mb-3">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Rules</strong>
+      </c-card-header>
+      <c-card-body>
+        <c-nav variant="tabs">
+          <c-nav-item>
+            <a #listOfWorkshopsTab [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="0" cNavLink [class.active-tab]="tabContent1.activeTabPaneIdx === 0" style="color: rgb(159, 153, 153);">
+              <svg cIcon class="me-2" name="cilHome"></svg>
+              List of Rules
+            </a>
+          </c-nav-item>
+          <c-nav-item>
+            <a [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="1" cNavLink [class.active-tab]="tabContent1.activeTabPaneIdx === 1" style="color: rgb(159, 153, 153);">
+              <svg cIcon class="me-2" name="cilUser"></svg>
+              Add Rule
+            </a>
+          </c-nav-item>
+          
+        </c-nav>
+        <c-tab-content #tabContent1="cTabContent" [activeTabPaneIdx]="0"  cRounded="bottom">
+          <c-tab-pane class="p-3 preview" role="tabpanel">
+
+           <table id="table"  [hover]="true" cTable>
+            <thead style="background-color: #c2d28e;">
+            <tr>
+             <!-- <th scope="col"> Project</th> -->
+             <th>Rule</th>
+             <th>Status</th>
+             <th>Description</th>
+             <th></th>
+             <th></th>
+            </tr>
+            <tr>
+              <!-- <td><input type="text" class="form-control" placeholder="Filter by Project" [(ngModel)]="projectFilter" (keyup)="applyFilters()"></td> -->
+              <td><input type="text" class="form-control" placeholder="Filter by Rule" [(ngModel)]="ruleFilter" (keyup)="applyFilters()"></td>
+              <td><input type="text" class="form-control" placeholder="Filter by Status" [(ngModel)]="statusFilter" (keyup)="applyFilters()"></td>
+              <td><input type="text" class="form-control" placeholder="Filter by Description" [(ngModel)]="descriptionFilter" (keyup)="applyFilters()"></td>
+              <th></th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let list of filteredRulesList">
+              <!-- <td>{{list.project.project_Name}}</td> -->
+              <td>{{list.rule}}</td>
+              <td>{{list.status}}</td>
+              <td [innerHTML]="list.description"></td>
+              <td><mat-icon (click)="updateRules(list.id_rule)" title="Edit">border_color</mat-icon></td>
+              <td> <mat-icon (click)="deleteRules(list.id_rule)"  title="Delete">delete_outline</mat-icon></td>
+            </tbody>
+           </table>
+          </c-tab-pane>
+          <c-tab-pane class="p-3 preview" role="tabpanel">
+            <form [formGroup]="saveForm" #myForm="ngForm" (ngSubmit)="savingData(saveForm)">
+              <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Rule</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="inputEmail3" formControlName="rule">
+                </div>
+              </div>
+            
+              <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 ">Status</legend>
+                <div class="col-sm-6">
+                  <select cSelect id="inputState" class="form-control" formControlName="status">
+                    <option>Done</option>
+                    <option>Skipped</option>
+                    <option>ToDo</option>
+                    <option>ToReview</option>
+                  </select>
+                </div>
+              </fieldset>
+              <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-6">
+                  <editor
+                  formControlName="description"
+                    [init]="{
+                      base_url: '/tinymce',
+                      suffix: '.min',
+                      height: 500,
+                      menubar: false,
+                      plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                      ],
+                      toolbar:
+                        'undo redo | formatselect | bold italic backcolor | \
+                        alignleft aligncenter alignright alignjustify | \
+                        bullist numlist outdent indent | removeformat | help'}">
+                   </editor>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+              
+                </div>
+              </div>
+              <button type="submit" class="btn" style="background-color:#c2d28e ;">Create rule</button>
+            </form>
+          </c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12">
+  </c-col>
+  

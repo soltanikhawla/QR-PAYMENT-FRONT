@@ -1,0 +1,31 @@
+.add-actor-link {
+  margin-right: 30px; /* Ajustez la valeur selon vos préférences d'espacement */
+}
+
+.Name .btn{
+  font-size: 15px;
+  color: #101010;
+}
+.btn:focus{
+  color: #94a94c;
+  box-shadow: #a7a9ac;
+  border:none;
+}
+.add-actor-link.selected .btn {
+  color: #94a94c;
+}
+.btn b{
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.sourceTargetBtn{
+  font-size: 15px; 
+  border-color: #94a94c;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: white;
+}

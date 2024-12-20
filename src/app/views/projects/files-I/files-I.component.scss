@@ -1,0 +1,118 @@
+  * { 
+  box-sizing: border-box;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row {
+  margin-left:-5px;
+  margin-right:-5px;}
+
+  .save{
+    margin-left:775px;;
+  }
+    
+  .column {
+    float: left;
+    width: 50%;
+    padding: 5px;
+  }
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 70%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 6px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.green {
+  background-color: green;
+}
+
+.red {
+  background-color: red;
+}
+.active { background-color: rgb(146, 234, 159); } 
+
+
+.small-icon {
+  font-size: 5px; 
+  height:38px;
+}
+
+.custom-scroll-table {
+max-height: 150px; 
+overflow: auto;
+}
+
+.custom-scroll-table table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.custom-scroll-table th, .custom-scroll-table td {
+padding: 8px;
+border: 1px solid #ddd;
+}
+
+.custom-scroll {
+max-height: 150px; 
+overflow: auto;
+}
+
+.custom-scroll table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.custom-scroll th, .custom-scroll td {
+padding: 8px;
+border: 1px solid #ddd;
+}
+
+.bouton{
+  float:right;
+}
+.form{
+
+  position: relative;
+  margin-left: -200px;
+}
+
+.form .bi-search{
+  position: absolute;
+  top:5px;
+  left: 20px;
+  color: #9ca3af;
+}
+.form-input{
+
+  height: 25px;
+  text-indent: 33px;
+  border-radius: 10px;
+}
+
+.form-input:focus{
+
+  box-shadow: #a7a9ac;
+  border:none;
+}

@@ -1,0 +1,37 @@
+<c-col xs="12">
+    <c-card class="mb-4">
+     <c-card-header>
+      <strong>List of Actions</strong>
+     </c-card-header>
+     <c-card-body>
+       <table [hover]="true" cTable>
+        <thead>
+        <tr>
+         <th scope="col">ID Action</th>
+         <th scope="col">Action</th>
+         <th scope="col">Actor</th>
+         <th scope="col">Date Creation</th>
+         <th scope="col">Due Date</th>
+         <th scope="col">External reference</th>
+         <th scope="col">Status</th>
+         <th></th>
+         <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let list of listAction">
+            <td>{{list.id_Action}}</td>
+            <td>{{list.action}}</td>
+            <td>{{list.actor.first_name}}</td>
+            <td>{{list.creation_Date | date: 'mediumDate'}}</td>
+            <td>{{list.end_Date | date: 'mediumDate'}}</td>
+            <td>{{list.external_ref}}</td>
+            <td>{{list.status}}</td>
+            <td><mat-icon mat-icon-button title="edit" (click)="updateAction(list.id_Action)" title="Update">edit</mat-icon></td>
+            <td col-sm-12><mat-icon  mat-icon-button  (click)="deleteAction(list.id_Action)" title="delete">delete_forever</mat-icon></td> 
+        </tr>
+        </tbody>
+       </table>
+     </c-card-body>
+    </c-card>
+   </c-col>

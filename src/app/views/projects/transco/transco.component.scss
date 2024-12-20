@@ -1,0 +1,25 @@
+
+.form{
+
+    position: relative;
+    margin-left: -200px;
+}
+
+.form .bi-search{
+    position: absolute;
+    top:2px;
+    left: 20px;
+    color: #9ca3af;
+}
+.form-input{
+
+    height: 25px;
+    text-indent: 33px;
+    border-radius: 10px;
+}
+
+.form-input:focus{
+
+    box-shadow: #a7a9ac;
+    border:none;
+}

@@ -1,0 +1,63 @@
+<div class="bg-white min-vh-100 d-flex flex-row align-items-center" style="background-image: url('assets/img/brand/background.png');background-size: cover; background-position: center;">
+  <c-container>
+    <c-row class="justify-content-center">
+      <c-col >
+        <c-card-group>
+          <c-card class="p-5" style="background-color:#e9eff8 ;">
+            <c-card-body>
+              <form #loginForm="ngForm"  (ngSubmit)="login(loginForm)">
+                <h1 class="text-center" style="color: #1d3b71;"><b>WELCOME</b> </h1>
+                <p class="text-medium-emphasis">Sign In to your account</p>
+                <c-input-group class="mb-3">
+                  <span cInputGroupText style="background-color: white;">
+                    <svg cIcon name="cilUser"></svg>
+                  </span>
+                  <input cFormControl ngModel name="username"   placeholder="Username" required>
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <span cInputGroupText style="background-color: white;">
+                    <svg cIcon name="cilLockLocked"></svg>
+                  </span>
+                  <input cFormControl ngModel [type]="showPassword ? 'text' : 'password'" name="password" id="password" placeholder="password" required>
+                </c-input-group>
+                <c-input-group class="mb-4">
+                  <button type="submit"  cButton class="custom-button" style="background-color: #6998d0; width: 567px; height: 40px;">Login</button>
+                </c-input-group>
+                <c-row>
+                  <div class="content-wrapper">
+                    <!-- <h1>  Sign up</h1> -->
+                    <div class="bottom-row">
+                       <!-- <button cButton class="custom-button"  routerLink="/register" color="link">
+                        Register Now!
+                      </button>  -->
+                     <!-- <h3 class="teamwill-text">TEAMWILL</h3> -->
+                    </div>
+                  </div>
+                  <c-col class="text-right" xs="6">
+                   
+                    <!-- <button cButton class="px-0" color="link">
+                      Forgot password?
+                    </button> -->
+                  </c-col>
+                </c-row>
+              </form>
+            </c-card-body>
+          </c-card>
+          <c-card [ngStyle]="{'width.%': 10}" style="background-image: url('assets/img/brand/login.png');background-size: cover; background-position: center;">
+            <c-card-body class="text-center blurry-background" >
+              <div class="content-wrapper">
+                <!-- <h1>  Sign up</h1> -->
+                <div class="bottom-row">
+                  <!-- <button cButton class="custom-button"  routerLink="/register" color="link">
+                    Register Now!
+                  </button> -->
+                 <!-- <h3 class="teamwill-text">TEAMWILL</h3> -->
+                </div>
+              </div>
+            </c-card-body>
+          </c-card>
+        </c-card-group>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

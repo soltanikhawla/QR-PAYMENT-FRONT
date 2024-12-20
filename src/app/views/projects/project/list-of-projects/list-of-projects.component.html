@@ -1,0 +1,68 @@
+<!-- <mat-form-field>
+  <input matInput (keyup)="applyFilter($event, 'project_Name')" placeholder="Search Projects Name">
+</mat-form-field> -->
+<!-- <div class="input-group mt-2 w-100">
+  <input class="form-control" (keyup)="applyFilter($event, 'project_Name')" placeholder="Search Project Name">
+</div> -->
+
+
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header>
+      <strong>Projects</strong>
+    </c-card-header>
+    <c-card-body>
+      <div class="example-container mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+          <!-- Project Name Column -->
+          <ng-container matColumnDef="project_Name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="toggleSearchField('project_Name')">
+              <span *ngIf="activeSearchField !== 'project_Name'">{{ 'Project Name' }}</span>
+              <input class="form-control" *ngIf="activeSearchField === 'project_Name'" matInput (blur)="resetSearchField()" (keyup)="applyFilter($event, 'project_Name')" placeholder="Search Project Name">
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.project_Name}} </td>
+          </ng-container>
+
+          <!-- Date Creation Column -->
+          <ng-container matColumnDef="date_Creation">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="toggleSearchField('date_Creation')">
+              <span *ngIf="activeSearchField !== 'date_Creation'">{{ 'Date Creation' }}</span>
+              <input class="form-control" *ngIf="activeSearchField === 'date_Creation'" matInput (blur)="resetSearchField()" (keyup)="applyFilter($event, 'date_Creation')" placeholder="Search Date Creation">
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.date_Creation | date: 'mediumDate'}} </td>
+          </ng-container>
+
+          <!-- Version Column -->
+          <ng-container matColumnDef="version">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="toggleSearchField('version')">
+              <span *ngIf="activeSearchField !== 'version'">{{ 'Version' }}</span>
+              <input class="form-control" *ngIf="activeSearchField === 'version'" matInput (blur)="resetSearchField()" (keyup)="applyFilter($event, 'version')" placeholder="Search Version">
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.version}} </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button (click)="updateProject(element.id_PROJECT, element.project_Name)">
+                <mat-icon title="Edit">border_color</mat-icon>
+              </button>
+              <button mat-button (click)="deleteProject(element.id_PROJECT)">
+                <mat-icon title="Delete">delete_outline</mat-icon>
+              </button>
+              <button mat-button (click)="createProjectVersion(element.id_PROJECT)">
+                <mat-icon title="Backup">backup</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr style="background-color: #c2d28e;" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSize]="15" [pageSizeOptions]="[5, 10, 20, 30]" [showFirstLastButtons]="true"></mat-paginator>
+      </div>
+    </c-card-body>
+  </c-card>
+</c-col>

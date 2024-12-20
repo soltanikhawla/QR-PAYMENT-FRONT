@@ -1,0 +1,63 @@
+<c-row>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Edit Actions</strong>
+      </c-card-header>
+      <c-card-body>
+        <form [formGroup]="saveForm" (ngSubmit)="updateAction()">
+            <c-col md="12">
+              <label cLabel for="tgt_Column_Name">Target File</label>
+              <input  cFormControl id="tgt_Column_Name" type="text" class="form-control" [value]="action.mapping.fileNameT" readonly />
+            </c-col>
+            <c-col md="12" >
+              <label cLabel for="tgt_Column_Name">Column Name</label>
+              <input  cFormControl id="tgt_Column_Name" class="form-control" type="text" [value]="action.mapping.tgt_Column_Name" readonly />
+            </c-col>
+            <c-col md="12">
+              <label cLabel for="project_Name">Actor</label>
+              <select id="inputState" class="form-control" (change)="onActorSelectionChange($event)">
+                <option *ngFor="let actor of listActor" [value]="actor.id_Actor" [selected]="actor.id_Actor === action.actor.id_Actor">
+                  {{ actor.first_name }} {{ actor.last_name }}
+                </option>
+              </select>
+            </c-col>
+              <c-col md="3">
+                <label cLabel for="date_Creation">Creation Date</label>
+                <input type="date" class="form-control" [value]="formattedCreationDate" (input)="updateDateCreation($event)" />
+               </c-col>
+             
+             <c-col md="3">
+              <label cLabel for="date_Creation">Due Date</label>
+              <input   type="date"  class="form-control" [value]="formattedEndDate" (input)="updateEndDate($event)" />
+             </c-col>
+
+
+            <c-col md="12">
+              <label cLabel for="">External reference</label>
+              <input   type="text" placeholder="external_ref" class="form-control" formControlName="external_ref" [(ngModel)]="action.external_ref"  />
+            </c-col>
+            
+            <c-col md="12">
+              <label cLabel for="inputState">Status</label>
+              <select  cSelect id="inputState" class="form-control" formControlName="status"  [(ngModel)]="action.status">
+                <option>Opened</option>
+                <option>In progress</option>
+                <option>Closed</option>
+                <option>Canceled</option>
+              </select>
+            </c-col>
+            <c-col md="12">
+              <label cLabel for="action">Description</label>
+              <textarea *ngIf="action" id="action" class="form-control" formControlName="action" [(ngModel)]="action.action" ></textarea>
+            </c-col>
+            <c-col xs="12" class="mt-3">
+              <button type="submit" class="btn btn-outline-success btn-custom">Update Action</button>
+            </c-col>
+           
+
+          </form>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>

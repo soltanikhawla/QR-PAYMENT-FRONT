@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="card wizard-card">
+    <div class="wizard-header">
+      <h1 class="wizard-title">Mapping Files</h1>
+    </div>
+    <div class="wizard-navigation">
+      <ul>
+        <li  [class.active]="activeTab === 'project'">Projects</li>
+        <li [class.active]="activeTab === 'upload'">Upload</li>
+        <li [class.active]="activeTab === 'file'">File</li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <!-- project Tab -->
+      <div *ngIf="activeTab === 'project'" class="tab-pane active" id="project">
+        <label for="formGroupExampleInput" class="form-label">Choose a project : </label>
+        <select class="form-select" size="5" aria-label="size 5 select example" (change)="onProjectSelectionChange($event)">
+          <option *ngFor="let project of listP" [value]="project. id_PROJECT">{{ project.project_Name }}</option>
+        </select>
+      </div>
+       <!-- upload Tab -->
+        <div *ngIf="activeTab === 'upload'" class="tab-pane active" id="upload" class="form-inline" >
+        <input type="file" style="width: 400px;" class="form-control" name="FileUploadCible"
+    (change)="onFileSelect($event, 1)" [(ngModel)]="targetFileName" formControlName="cibleFileName" id="cibleFileName" accept=".csv"  />
+      <button type="submit" (click)="uploadFileAndFetchMappings()" class="btn btn-secondary ml-4" >Upload</button>
+     
+      </div>
+
+      <!-- file Tab -->
+      <div *ngIf="activeTab === 'file'" class="tab-pane active" id="file">
+        <div class="table-container">
+         <div  class="card" >
+          <c-col>
+            <c-card class="mb-4">
+              <c-card-header ngPreserveWhitespaces="ngPreserveWhitespaces" style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center;">
+                  <h2>Mapping Of : {{ selectedFile }}</h2>  
+                </div>
+              </c-card-header>
+              
+              <c-card-body>
+                <div class="scrollB">
+                  <table class="table table-striped table-bordered table-hover" id ="excel-table">
+                   <thead>
+                     <tr>
+                      <th>FileNameT</th>
+                      <th>FieldNumber</th>
+                      <th>TGT_Column_Name</th>
+                      <!-- <th>CommentT</th> -->
+                      <!-- <th >TGT_Column_Description</th> -->
+                      <!-- <th >TGT_Column_Length</th> -->
+                      <th>fileNameS</th>
+                      <th>SRC_Column_Name</th>
+                      <!-- <th >SRC_Column_Length</th> -->
+                      <th>DefaultValue</th>
+                      <th>IsTransco</th>
+                      <th>TranscoTab</th>
+                      <th>MappingRule</th>
+                      <th>Comment</th>
+                      <th>Status</th>
+                  </thead>
+                  <tbody>
+                     <ng-container *ngFor="let mapping of itemM; let i=index">
+                        <tr>
+                          <td style="max-width: 100px;">{{mapping.fileNameT}}</td>
+                          <td>{{mapping.fieldNumber}}</td>
+                          <td style="max-width: 200px;">{{mapping.tgt_Column_Name }}</td>
+                          <!-- <td>{{mapping.commentT}}</td> -->
+                           <!-- <td>{{mapping.tgt_Column_Description }}</td> -->
+                           <!-- <td>{{mapping.tgt_Column_Length}}</td> -->
+                          <td style="max-width: 200px;">{{mapping.fileNameS}}</td>
+                          <td style="max-width: 100px;">{{mapping.src_Column_Name}}</td>
+                           <!-- <td>{{mapping.src_Column_Length}}</td> -->
+                           <td>{{mapping.defaultvalue}}</td>
+                          <td>{{mapping.is_Transco}}</td>
+                          <td>{{mapping.transco_table}}</td>
+                          <td style="max-width: 800px;">
+                            <div [innerHTML]="sanitizeHtml(mapping.mappingRule)"></div>
+                           <div class="d-flex justify-content-end">
+                             <mat-icon  (click)="openEditorDialog(mapping.mappingRule,i)" title="editor">keyboard_arrow_right</mat-icon>
+                           </div>   
+                           </td>
+                          <td><input type="hidden" [(ngModel)]="mapping.comment" placeholder="user" /></td>
+                          <td>{{mapping.status}}</td>
+                             <input type="hidden" [(ngModel)]="mapping.is_Mandatory" placeholder="user" />
+                             <input type="hidden" [(ngModel)]="mapping.last_Modification" placeholder="user" />
+                             <input type="hidden" [(ngModel)]="mapping.project" placeholder="user" />
+                             <input type="hidden" [(ngModel)]="currentDate" readonly>
+                          </tr>
+                     </ng-container>
+                  </tbody>
+               </table>
+               </div>
+              </c-card-body>
+            
+            </c-card>
+          </c-col>
+        </div>
+      </div>
+      </div>
+  
+  
+    </div>
+    <div class="wizard-footer">
+      <div class="d-flex justify-content-between">
+        <button *ngIf="activeTab === 'upload' || activeTab === 'file'" type="button" class="btn btn-previous" (click)="previousTab()">previous</button>
+        <button *ngIf="activeTab === 'project' || activeTab === 'upload'" type="button" class="btn btn-next" (click)="nextTab()">Next</button>
+    </div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+

@@ -1,0 +1,17 @@
+.scrollB {
+    max-height: 200px; /* Hauteur maximale pour la barre de défilement verticale */
+    overflow-x: auto; /* Barre de défilement horizontale si nécessaire */
+    overflow-y: auto; /* Barre de défilement verticale si nécessaire */
+  }
+  table {
+    width: 100%; /* Set the table width to 100% of its container */
+    border-collapse: collapse; /* Optional: To remove cell spacing and borders */
+  }
+  
+  table thead {
+    position: sticky;
+    top: 0; /* Stick the header at the top */
+    background-color: #fff; /* You can set the background color you prefer */
+  }
+  
+  

@@ -1,0 +1,44 @@
+
+.selected-row {
+  background-color: #c2c1d1;
+  cursor: pointer; 
+}
+.table-container {
+  display: flex;
+ // justify-content:space-around ; /* Adjust as needed */
+  gap: 7px; /* Adjust the gap between tables */
+}
+.table-taille1 {
+  max-height: 800px; /* Hauteur maximale pour la barre de défilement verticale */
+  overflow-x: auto; /* Barre de défilement horizontale si nécessaire */
+  overflow-y: auto; /* Barre de défilement verticale si nécessaire */
+}
+
+.table-taille3 {
+  max-height: 750px; /* Hauteur maximale pour la barre de défilement verticale */
+  overflow-x: auto; /* Barre de défilement horizontale si nécessaire */
+  overflow-y: auto; /* Barre de défilement verticale si nécessaire */
+}
+
+.scrollB {
+  max-height: 700px; /* Hauteur maximale pour la barre de défilement verticale */
+  overflow-x: auto; /* Barre de défilement horizontale si nécessaire */
+  overflow-y: auto; /* Barre de défilement verticale si nécessaire */
+}
+table {
+  width: 100%; /* Set the table width to 100% of its container */
+  border-collapse: collapse; /* Optional: To remove cell spacing and borders */
+}
+
+table thead {
+  position: sticky;
+  top: 0; /* Stick the header at the top */
+  background-color: #fff; /* You can set the background color you prefer */
+}
+
+.sidebar-narrow {
+  width: 60px; /* Ajustez la largeur de la sidebar étroite selon vos préférences */
+  display: block;
+  transition: width 0.3s ease; 
+}
+

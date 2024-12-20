@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="card wizard-card">
+      <div class="wizard-header">
+        <h3 class="wizard-title">Build Your Profile</h3>
+        <h5>This information will let us know more about you.</h5>
+      </div>
+      <!-- <div class="wizard-navigation">
+        <ul>
+          <li (click)="selectTab('about')" [class.active]="activeTab === 'about'">ACCOUNT</li>
+          <li (click)="selectTab('account')" [class.active]="activeTab === 'account'">ACCOUNT</li>
+          <li (click)="selectTab('address')" [class.active]="activeTab === 'address'">ADDRESS</li>
+        </ul>
+      </div> -->
+      <div class="tab-content">
+        <!-- About Tab -->
+        <div *ngIf="activeTab === 'about'" class="tab-pane active" id="about">
+          <h4 >Let's start with the basic information</h4>
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-1">
+              <div class="picture-container">
+                <div class="picture">
+                  <img src="assets/img/avatars/10.jpg" class="picture-src" id="wizardPicturePreview" title="">
+                  <input type="file" (change)="onFileChange($event)" id="wizard-picture">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <form [formGroup]="profileForm">
+                <div class="form-group">
+                  <label>Username <small>(required)</small></label>
+                  <input formControlName="username" type="text" class="form-control" placeholder="username">
+                </div>
+                <div class="form-group">
+                  <label>Email <small>(required)</small></label>
+                  <input formControlName="email" type="email" class="form-control" placeholder="aaa@gmail.com">
+                </div>
+                <div class="form-group">
+                  <label>Password <small>(required)</small></label>
+                  <input formControlName="password" type="text" class="form-control" placeholder="Password">
+                </div>
+                <button type="button" (click)="register()" class="btn " style="background-color: #c2d28e;">Register</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div *ngIf="activeTab === 'account'" class="tab-pane active" id="account">
+          <h4 class="info-text">Let's start with the basic information (with validation)</h4>
+       
+        </div> -->
+  
+        <!-- Account Tab -->
+        <!-- <div *ngIf="activeTab === 'address'" class="tab-pane active" id="address">
+          <h4 class="info-text">Account Information</h4>
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-1">
+              <form [formGroup]="accountForm">
+                <div class="form-group">
+                  <label>Username <small>(required)</small></label>
+                  <input formControlName="username" type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <label>Password <small>(required)</small></label>
+                  <input formControlName="password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <label>Confirm Password <small>(required)</small></label>
+                  <input formControlName="confirmPassword" type="password" class="form-control" placeholder="Confirm Password">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> -->
+  
+        <!-- Address Tab -->
+        <!-- <div *ngIf="activeTab === 'address'" class="tab-pane" id="address">
+          <h4 class="info-text">Address Information</h4>
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-1">
+              <form [formGroup]="addressForm">
+                <div class="form-group">
+                  <label>Street <small>(required)</small></label>
+                  <input formControlName="street" type="text" class="form-control" placeholder="Street">
+                </div>
+                <div class="form-group">
+                  <label>City <small>(required)</small></label>
+                  <input formControlName="city" type="text" class="form-control" placeholder="City">
+                </div>
+                <div class="form-group">
+                  <label>State <small>(required)</small></label>
+                  <input formControlName="state" type="text" class="form-control" placeholder="State">
+                </div>
+                <div class="form-group">
+                  <label>Postal Code <small>(required)</small></label>
+                  <input formControlName="postalCode" type="text" class="form-control" placeholder="Postal Code">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="wizard-footer">
+        <div class="pull-right">
+          <!-- <button type="button" class="btn btn-next" (click)="nextTab()">Next</button> -->
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,140 @@
+<c-col xs="12">
+    <c-card class="mb-3">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Transco</strong>
+      </c-card-header>
+      <c-card-body>
+        <c-tab-content #tabContent1="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
+          <c-tab-pane class="p-3 preview" role="tabpanel">
+            <table [hover]="true" cTable>
+              <thead>
+                <tr >
+                  <th style="font-size: 16px; ">
+                    <div style="display: flex; align-items: center;;">
+                      <span style="margin-right: 125px;">Transco</span>
+                      
+                      <div style="width: 100px; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterColName">
+                        <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                      </div>
+                      <mat-menu #FilterColName="matMenu">
+                        <div style="padding: 8px;">
+                          <input matInput style="width: 100%;" class="form-control" placeholder="Search ColName" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm0" />
+                        </div>
+                        <mat-divider></mat-divider>
+                        <button mat-button (click)="searchTransco()">Filter</button>
+                        <button mat-button (click)="cancelTransco()">Cancel</button>
+                      </mat-menu>
+                    </div>
+                  </th>
+                  <th style="font-size: 16px;">
+                    <div style="display: flex; align-items: center;">
+                      <span style="margin-right: 125px;">Source value</span>
+                      <div style="width: 100px; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterColName1">
+                        <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                      </div>
+                      <mat-menu #FilterColName1="matMenu">
+                        <div style="padding: 8px;">
+                          <input matInput style="width: 100%;" class="form-control" placeholder="Search Source Value" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm2" />
+                        </div>
+                        <mat-divider></mat-divider>
+                        <button mat-button (click)="searchSourceValue()">Filter</button>
+                        <button mat-button (click)="cancelSourceValue()">Cancel</button>
+                      </mat-menu>
+                    </div>
+                  </th>
+                  
+                  <th style="font-size: 16px;">
+                    <div style="display: flex; align-items: center;">
+                      <span style="margin-right: 125px;">Target value</span>
+                      <div style="width: 100px; cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterColName2">
+                        <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                      </div>
+                      <mat-menu #FilterColName2="matMenu">
+                        <div style="padding: 8px;">
+                          <input matInput style="width: 100%;" class="form-control" placeholder="Search ColName" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm1" />
+                       
+                        </div>
+                        <mat-divider></mat-divider>
+                        <button mat-button (click)="searchTargetValue()">Filter</button>
+                        <button mat-button (click)="cancelTargetValue()">Cancel</button>
+                      </mat-menu>
+                    </div>
+                  </th>
+                  <th>  
+                     <div class="d-flex justify-content-end mb-3">
+                    <button class="btn btn-outline" style="background-color: #c2d28e; color: white;" (click)="addTranscoRow()">Add Transco</button>
+                  </div></th>
+                </tr>
+                <ng-container *ngIf="showAddTranscoRow">
+                  <tr>
+                    <td>
+                      <input type="text" class="form-control" [(ngModel)]="transcoTableNew">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" [(ngModel)]="sourceValueNew">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" [(ngModel)]="targetValueNew">
+                      <div *ngIf="submitted && saveForm.get('targetValueNew')?.hasError('required')" class="text-danger">
+                        Target Value is required.
+                      </div>
+                    </td>
+                    <td>
+                      <button class="btn" style="background-color: #c2d28e; color: white;" (click)="saveTransco()">Save</button>
+                      <button class="btn btn-outline-secondary" (click)="cancelAddTransco()">Cancel</button>
+                    </td>
+                  </tr> 
+                </ng-container>
+              </thead>
+              <tbody>
+                <tr *ngFor="let list of transco" >
+                  <td>{{list.transcoTable}}</td>
+                  <td>{{list.sourceValue}}</td>
+                  <td>{{list.targetValue}}</td>
+                  <td>
+                    <mat-icon (click)="deleteTransco(list.idTransco)">delete_outline</mat-icon> 
+                   
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+        
+          </c-tab-pane>
+          <!-- <c-tab-pane class="p-3 preview" role="tabpanel">
+            <form cForm class="row g-3" [formGroup]="saveForm" (ngSubmit)="addTransco(saveForm)">
+                <c-col md="6">
+                    <label cLabel for="">Transco Table</label>
+                    <input type="text" class="form-control" formControlName="transcoTable">
+                    <div *ngIf="submitted && saveForm.get('transcoTable')?.hasError('required')" class="text-danger">
+                      Transco Table is required.
+                    </div>
+                </c-col>
+            <c-col md="6">
+                <label cLabel for="">Source Value</label>
+                <input type="text"  class="form-control" formControlName="sourceValue">
+                <div *ngIf="submitted && saveForm.get('sourceValue')?.hasError('required')" class="text-danger">
+                  Source Value is required.
+                </div>
+            </c-col>
+            
+            
+            <c-col md="6">
+                <label cLabel for="">Target Value </label>
+                <input type="text" class="form-control" id="" formControlName="targetValue" >
+                <div *ngIf="submitted && saveForm.get('targetValue')?.hasError('required')" class="text-danger">
+                Target Value is required.
+                </div>
+            </c-col>
+            <c-col xs="12">
+                <button  type="submit" class="btn btn-outline-success">Create Transco</button>
+            </c-col>
+        </form>
+         </c-tab-pane> -->
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12">
+  </c-col>
+  

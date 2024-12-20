@@ -1,0 +1,64 @@
+<c-row>
+  <c-col xs="12">
+    <c-card class="mb-4">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Edit Actor</strong>
+      </c-card-header>
+      <c-card-body>
+     
+          <form cForm class="row g-3" [formGroup]="saveForm" (ngSubmit)="updateActor()">
+            <c-col md="6">
+              <label cLabel for="first_name">First Name</label>
+              <input  id="first_name" type="text"  class="form-control" formControlName="first_name" [(ngModel)]="actor.first_name" />
+            
+            </c-col>
+
+            <c-col md="6">
+              <label cLabel for="inputState">Last Name</label>
+              <input type="text" placeholder="last_name" class="form-control" formControlName="last_name" [(ngModel)]="actor.last_name">
+          
+            </c-col>
+
+
+            <c-col md="6">
+              <label cLabel for="email">Email</label>
+              <input cFormControl id="email" type="email" placeholder="libra@mapping" formControlName="email" [(ngModel)]="actor.email" />
+            </c-col>
+
+            <c-col md="6">
+              <label cLabel for="Version">Role</label>
+              <select cSelect id="inputState" class="form-control" formControlName="role" [(ngModel)]="actor.role">
+                <option>MOE</option>
+                <option>MOA</option>
+                <option>ExpertT</option>
+                <option>ExpertM</option>
+              </select>
+              <!-- <input  id="role" formControlName="role" class="form-control" [(ngModel)]="actor.role" /> -->
+            </c-col>
+           
+          
+            <c-col xs="12">
+              <button type="submit" class="btn btn-outline-success btn-custom">Update Actor</button>
+            </c-col>
+          </form>
+        
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

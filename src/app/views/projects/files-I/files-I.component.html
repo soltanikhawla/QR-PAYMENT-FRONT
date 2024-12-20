@@ -1,0 +1,123 @@
+<c-col xs="12">
+  <c-card class="mb-4">
+    <c-card-header ngPreserveWhitespaces>
+      <strong>Files</strong>
+    </c-card-header>
+    <c-card-body>
+      <div class="row ">
+        <div class="col">
+          <label>
+            <h2>Source File</h2>
+            </label>
+            <div id="checkboxContainer">
+          <div class="custom-scroll-table">
+            <table>
+              <thead>
+                <tr>
+                  <th class="d-flex justify-content-between align-items-center">
+                    <span>File</span>
+                    <div class="search-container">
+                      <div class="d-flex">
+                        <div class="col-md-6">
+                          <div class="form">
+                            <i class="bi bi-search"></i>
+                            <input type="text" class="form-control form-input" [(ngModel)]="searchQueryS" (input)="onSearchS()" placeholder="Search source file ...">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
+                   <th>Select</th>
+               </tr>
+             </thead>
+              <tbody>
+               <tr *ngFor="let itemObj of itemSource; let i = index">
+                  <td>
+                      {{ itemObj.item }}
+                  </td>
+                  <td>
+                      <input type="checkbox" [(ngModel)]="itemObj.checked" (change)="toggleItemSelectionS(itemObj)" />
+                  </td>
+               </tr>
+              </tbody>
+            </table>
+         </div>
+             <br>
+      </div>
+          <div class="custom-scroll" >
+            <table>
+              <thead>
+                <tr>
+                  <th> <span><mat-icon>playlist_add</mat-icon >Add to existing List </span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let selectedItem of selectedItemS">
+                  <td>{{ selectedItem }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+   </div>
+      <!-- ****************************Target File******************************************** -->
+
+      <div class="col">
+        <label>
+          <h2>Target File</h2>
+          </label>
+          <div id="checkboxContainer">
+          <div class="custom-scroll-table">
+            <table>
+                <thead>
+                    <tr>
+                      <th class="d-flex justify-content-between align-items-center">
+                        <span>File</span>
+                        <div class="search-container">
+                          <div class="d-flex">
+                            <div class="col-md-6">
+                              <div class="form">
+                                <i class="bi bi-search"></i>
+                                <input type="text" class="form-control form-input" [(ngModel)]="searchQueryC" (input)="onSearchC()" placeholder="Search target file ...">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                        <th>Select</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let itemObj of itemCible; let i = index">
+                        <td>
+                            {{ itemObj.item }}
+                        </td>
+                        <td>
+                            <input type="checkbox" [(ngModel)]="itemObj.checked" (change)="toggleItemSelectionC(itemObj)" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+        <div class="custom-scroll" >
+          <table>
+            <thead>
+              <tr>
+                <th> <span><mat-icon>playlist_add</mat-icon >Add to existing List </span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let selectedItem of selectedItemC">
+                <td>{{ selectedItem }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+     </div>
+    </div>
+    <br>
+    <button class="btn" (click)="ButtonFunction()" style=" float:right; background-color:#c2d28e">Add files</button>
+</c-card-body>
+</c-card>
+</c-col>

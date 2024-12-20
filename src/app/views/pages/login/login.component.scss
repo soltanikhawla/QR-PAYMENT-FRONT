@@ -1,0 +1,20 @@
+// .blurry-background {
+//     backdrop-filter: blur(2px);
+//   }
+
+  .content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+
+
+.teamwill-text {
+  align-self: flex-end;
+}
+
+.button-wrapper {
+    align-self: flex-end;
+  }

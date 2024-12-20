@@ -1,0 +1,87 @@
+<c-row>
+  <c-col xs="12">
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        <mat-icon> bar_chart</mat-icon>
+        Nombre de transaction - Jours
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="bar" [data]="chartBarDataProjectByStatus" [options]="options1" />
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        <mat-icon> bar_chart</mat-icon>
+        Nombre des utilisateur - Mois
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="bar" [data]="chartBarDataProjectProgress" [options]="options1" />
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <!-- <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        <mat-icon> bar_chart</mat-icon>
+        Action-Actor
+      </c-card-header>
+
+      <c-card-body>
+        <c-chart type="bar" [data]="chartBarDataActionByActor" [options]="options1" />
+      </c-card-body>
+    </c-card>
+  </c-col> -->
+  <!-- <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+        <c-card-header>
+          <mat-icon>pie_chart</mat-icon>
+          Action - Status
+        </c-card-header>
+      <c-card-body>
+        <c-chart type="pie" [data]="chartBarDataForActionStatus" [options]="options" />
+      </c-card-body>
+    </c-card>
+  </c-col> -->
+</c-row>
+<c-row>
+  <!-- <c-col xs="12" lg="6">
+    <c-card class="mb-4">
+      <c-card-header>
+        Action by actor     
+      </c-card-header>
+      <c-card-body>
+        <c-chart type="pie" [data]="chartBarData2" [options]="options" />
+      </c-card-body>
+    </c-card>
+  </c-col> -->
+
+</c-row>
+<c-row>
+ 
+</c-row>
+
+
+<!-- <div class="row" style="margin-top: 10px">
+  <div class="col-md-4 col-sm-12 col-xs-12">
+    <c-chart type="bar" [data]="chartBarDataProjectByStatus" [options]="options" />
+  </div>
+  <div class=" card col-md-4 col-sm-12 col-xs-12">
+    <div class="header">
+      <c-chart type="bar" [data]="chartBarDataProjectByStatus" [options]="options" />
+    </div>
+    <div class="body">
+      <c-chart type="bar" [data]="chartBarDataProjectByStatus" [options]="options" />
+      <h4>bonjour</h4>
+      <p>xxxxxxxxxx</p>
+    </div>
+    <div class="footer">
+      <h4>ssssss</h4>
+      <div class="position"><i class="material-icons">location_on</i>aaaa</div>
+    </div>
+  </div>
+
+</div> -->

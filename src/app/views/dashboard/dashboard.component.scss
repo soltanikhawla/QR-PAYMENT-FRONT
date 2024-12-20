@@ -1,0 +1,65 @@
+:host {
+  .legend {
+    small {
+      font-size: x-small;
+    }
+  }
+}
+/*************************************/
+.row{
+  margin-top: 10px;
+}
+
+.card{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+  margin-top: 40px;
+}
+
+.card-header {
+  position: absolute;
+  text-align: center;
+  font-size: 14px;
+  background: #fbfcfd;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(255, 254, 254, 0.4);
+  /*margin: -20px 15px 0;*/
+  border-radius: 3px;
+  padding: 15px;
+  top: -40px;
+}
+
+.card-header i {
+  font-size: 24px;
+  width: 33px;
+  height: 33px;
+  line-height: 33px;
+  color: #fff;
+}
+
+.card-content{
+  position: relative;
+}
+
+.card-title{
+  padding-left: 80px;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-header {
+  display: flex;
+  align-items: center;
+}
+
+.right-header {
+  display: flex;
+  align-items: center;
+  margin-left: auto; 
+  margin-top: -13px;
+  color:#a2c0fe;
+}

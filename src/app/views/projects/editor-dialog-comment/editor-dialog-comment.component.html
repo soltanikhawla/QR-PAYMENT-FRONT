@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Comment : </h1>
+<div mat-dialog-content>
+  <editor
+    apiKey="no-api-key"
+    [disabled]="false"
+    [id]="'editor_' + uniqueId" 
+    [init]="{
+      toolbar: 'bold italic underline | formatpainter | aligncenter alignleft alignright alignjustify | selectall | ltr rtl | code | help',
+      base_url: '/tinymce',
+      models: {dom: '/tinymce/models/dom/model.js'},
+      suffix: '.min',
+      setup: onEditorInit,
+      
+    }"
+    [inline]="false"
+    toolbar="bold italic underline | formatpainter | aligncenter alignleft alignright alignjustify | selectall | ltr rtl | code | help"
+    [(ngModel)]="data.comment"
+    (ngModelChange)="onEditorChange($event)">
+  </editor>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.comment" cdkFocusInitial color="primary">OK</button>
+</div>

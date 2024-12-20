@@ -1,0 +1,34 @@
+  <c-row>
+    <c-col xs="12">
+      <c-card class="mb-4">
+        <c-card-header ngPreserveWhitespaces>
+          <strong>View Workshop</strong>
+        </c-card-header>
+        <c-card-body>
+          <form cForm class="row g-3">
+            <c-col md="12" class="mb-3">
+              <label cLabel for="workshop_Date">Workshop Date</label>
+              <input type="text" class="form-control" [value]="workshop.workshop_Date | date: 'mediumDate'" readonly />
+            </c-col>
+  
+            <c-col md="12" class="mb-3">
+              <label cLabel for="project_Name">Participants</label>
+              <input type="text" class="form-control" [value]="workshop.participants" readonly />
+            </c-col>
+  
+            <c-col md="12" class="mb-3">
+              <label cLabel for="mail_object">Mail Object</label>
+              <input type="text" class="form-control" [value]="workshop.mail_object" readonly />
+            </c-col>
+  
+            <c-col md="12" class="mb-3">
+              <label cLabel for="description">Description</label>
+              <textarea class="form-control" rows="3" readonly>{{stripHtmlTags(workshop.description)}}</textarea>
+            </c-col>
+          </form>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+  
+  

@@ -1,0 +1,87 @@
+   
+  <div class="container">
+    <div class="card wizard-card">
+      <div class="wizard-header">
+        <h3 class="wizard-title">Générer le QR Code</h3>
+        <!-- <h5>This information will let us know more about you.</h5> -->
+      </div>
+      <!-- <div class="wizard-navigation">
+        <ul>
+          <li (click)="selectTab('about')" [class.active]="activeTab === 'about'">ACCOUNT</li>
+          <li (click)="selectTab('account')" [class.active]="activeTab === 'account'">ACCOUNT</li>
+          <li (click)="selectTab('address')" [class.active]="activeTab === 'address'">ADDRESS</li>
+        </ul>
+      </div> -->
+      <div class="tab-content">
+        <!-- About Tab -->
+        <div *ngIf="activeTab === 'about'" class="tab-pane active" id="about">
+          <h4 >Entrez le montant pour générer le QR Code : </h4>
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-1">
+              <div class="picture-container">
+                <div class="picture">
+                  <!-- <img src="assets/img/avatars/10.jpg" class="picture-src" id="wizardPicturePreview" title=""> -->
+                  <!-- <input type="file" (change)="onFileChange($event)" id="wizard-picture"> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <form >
+
+                <div class="container">
+                    <!-- <h1>Generate QR Code</h1> -->
+                    <input
+                      type="number"
+                      id="amount"
+                      [(ngModel)]="amount"
+                      placeholder="Entrer le montant"
+                      min="0"
+                      step="0.01"
+                    />
+                    <br>
+                    <br>
+                    <button (click)="generateQRCode()" class="btn " style="background-color: #c2d28e;">Générer</button>
+                  
+                    <div *ngIf="qrCodeUrl" class="qr-code-container">
+                      <h3>Votre code QR:</h3>
+                      <img [src]="qrCodeUrl" alt="QR Code" />
+                      <a [href]="qrCodeUrl" download="qrcode.png">Download QR Code</a>
+                    </div>
+                  </div>
+                  
+               <!-- <div>
+                     <input formControlName="username" class="form-control" type="text" #qrText >
+                  <br>
+                    <button class="btn " (click)="generateQRCode(qrText.value)" style="background-color: #c2d28e;">Générer QR Code</button>
+                  </div>
+                  <div *ngIf="qrCodeImage">
+                    <img [src]="qrCodeImage" alt="QR Code généré" />
+                  </div> -->
+                
+                <!-- <div class="form-group">
+                  <label>Username <small>(required)</small></label>
+                  <input formControlName="username" type="text" class="form-control" placeholder="username">
+                </div>
+                <div class="form-group">
+                  <label>Email <small>(required)</small></label>
+                  <input formControlName="email" type="email" class="form-control" placeholder="aaa@gmail.com">
+                </div>
+                <div class="form-group">
+                  <label>Password <small>(required)</small></label>
+                  <input formControlName="password" type="text" class="form-control" placeholder="Password">
+                </div>
+                <button type="button" (click)="register()" class="btn " style="background-color: #c2d28e;">Register</button> -->
+              </form>
+            </div>
+          </div>
+        </div>
+     
+      </div>
+      <div class="wizard-footer">
+        <div class="pull-right">
+         
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>

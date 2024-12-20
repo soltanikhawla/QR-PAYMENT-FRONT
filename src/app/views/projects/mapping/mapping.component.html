@@ -1,0 +1,390 @@
+<div class="table-container" >
+  <c-col [sm]="2"  [ngClass]="{ 'sidebar-narrow': !isTableSourceOpen }">
+    <c-card class="mb-4" [hidden]="!isTableSourceOpen">
+      <c-card-header ngPreserveWhitespaces="ngPreserveWhitespaces" >
+        <strong>Source Files</strong>
+      </c-card-header>
+      <c-card-body  >
+        <div class="table-taille1">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>File Name</th>
+                <th>Column Name</th>
+                <th>Column Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let fileName of getGroupedItemKeySource()">
+                <tr (click)="toggleGroupSource(fileName)">
+                  <td>{{ fileName }}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <ng-container *ngFor="let item of groupedItemS[fileName] let i = index">
+                  <tr *ngIf="isGroupOpenSource(fileName)">
+                    <td></td>                
+                    <td (click)="selectedMapping(i,item, 1)">{{ item.column_Name }}</td>
+                    <td>{{ item.column_Type }}</td>
+                    <td>{{ item.description }}</td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </tbody>
+          </table>
+      </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+ 
+  <div [ngClass]="{'col-sm-9': isTableSourceOpen && isTableTargetOpen, 'col-sm-12': !isTableSourceOpen && !isTableTargetOpen, 'col-sm-10': (isTableSourceOpen && !isTableTargetOpen), 'col-sm-11':(!isTableSourceOpen && isTableTargetOpen)}">
+    <c-col>
+      <c-card class="mb-4">
+        <c-card-header ngPreserveWhitespaces="ngPreserveWhitespaces" style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; ">
+            <h2>Mapping Of "{{ selectedFileName }}"</h2>
+          </div>
+        
+          <button type="button" class="btn" style="background-color: #c2d28e; color: white;" (click)="exportToExcel()"> Excel</button>
+          
+        </c-card-header>
+        
+        <c-card-body *ngIf="showMappingTable">
+          <strong >General rule :</strong>
+          <form cForm class="row g-3" [formGroup]="saveForm" (ngSubmit)="CreateRegle()">
+          <div style="display: flex; align-items: center;">
+            <textarea type="text" cFormControl="cFormControl" formControlName="regleGenerale" [(ngModel)]="regleGenerale" required></textarea>
+            <!-- <div *ngIf="submitted && saveForm.get('regleGenerale')?.hasError('required')" class="text-danger">
+              General Rule is required.
+            </div> -->
+          </div>
+          </form>
+       <br>
+          <div  style="display: flex; align-items: center; justify-content: center; white-space: nowrap;">
+            <!-- <mat-icon style="color: red;">notification_important</mat-icon>
+            <strong style="color: red;">Mapping Rule is mandatory *</strong>-->
+          </div> 
+          <div class="scrollB">
+            <table class="table table table-bordered table-hover" id ="excel-table">
+            <thead style="background-color: #c2d28e;;">
+                <tr>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 3px;">Field</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterField">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #FilterField="matMenu">
+                                <div style="padding: 8px;">
+                                    <input matInput style="width: 100%;" class="form-control" placeholder="Search field" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm7" />
+                                </div>
+                                <mat-divider></mat-divider>
+                                <button mat-button (click)="searchFieldNumber()">Filter</button>
+                                <button mat-button (click)="cancelFilterField()">Cancel</button>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 30px;">TGT_Col_Name</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterColName">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #FilterColName="matMenu">
+                                <div style="padding: 8px;">
+                                    <input matInput style="width: 100%;" class="form-control" placeholder="Search ColName" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm0" />
+                                </div>
+                                <mat-divider></mat-divider>
+                                <button mat-button (click)="searchColumnName()">Filter</button>
+                                <button mat-button (click)="cancelFilterColName()">Cancel</button>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 30px;">Description</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterDescription">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #FilterDescription="matMenu">
+                                <div style="padding: 8px;">
+                                    <input matInput style="width: 100%;" class="form-control" placeholder="Search Description" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm1" />
+                                </div>
+                                <mat-divider></mat-divider>
+                                <button mat-button (click)="searchDesc()">Filter</button>
+                                <button mat-button (click)="cancelDescription()">Cancel</button>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                      <div style="display: flex; align-items: center;">
+                          <span style="margin-right: 30px;">FileName_SRC</span>
+                          <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterFilenameS">
+                              <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                          </div>
+                          <mat-menu #FilterFilenameS="matMenu">
+                              <div style="padding: 8px;">
+                                  <input matInput style="width: 100%;" class="form-control" placeholder="Search file name source" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm10" />
+                              </div>
+                              <mat-divider></mat-divider>
+                              <button mat-button (click)="searchFileNameS()">Filter</button>
+                              <button mat-button (click)="cancelFileNameS()">Cancel</button>
+                          </mat-menu>
+                      </div>
+                  </th>
+                  <th style="font-size: 13px; width: 150px;">
+                    <div style="display: flex; align-items: center;">
+                        <span style="margin-right: 30px;">SRC_Col_Name</span>
+                        <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterSrcColName">
+                            <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                        </div>
+                        <mat-menu #FilterSrcColName="matMenu">
+                            <div style="padding: 8px;">
+                                <input matInput style="width: 100%;" class="form-control" placeholder="Search source column name" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm11" />
+                            </div>
+                            <mat-divider></mat-divider>
+                            <button mat-button (click)="searchSRCColName()">Filter</button>
+                            <button mat-button (click)="cancelSRCColName()">Cancel</button>
+                        </mat-menu>
+                    </div>
+                </th>
+                <th>DefaultValue</th>
+
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 8px;">Transco</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="transcoFilterMenu">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #transcoFilterMenu="matMenu">
+                                <div style="padding: 8px;">
+                                    <select class="form-control" [(ngModel)]="filterTransco" (click)="$event.stopPropagation()" (change)="searchTransco()">
+                                        <option value="all">All</option>
+                                        <option value="checked">Checked</option>
+                                        <option value="unchecked">Unchecked</option>
+                                    </select>
+                                </div>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 30px;">TranscoTab</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterTranscoTable">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #FilterTranscoTable="matMenu">
+                                <div style="padding: 8px;">
+                                    <input matInput style="width: 100%;" class="form-control" placeholder="Search Transco table" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm8" />
+                                </div>
+                                <mat-divider></mat-divider>
+                                <button mat-button (click)="searchTranscoTable()">Filter</button>
+                                <button mat-button (click)="cancelTranscoTable()">Cancel</button>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 45px;">MappingRule</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterMapping">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #FilterMapping="matMenu">
+                                <div style="padding: 8px;">
+                                    <input matInput style="width: 100%;" class="form-control" placeholder="Search field" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm4" />
+                                </div>
+                                <mat-divider></mat-divider>
+                                <button mat-button (click)="searchMappingRule()">Filter</button>
+                                <button mat-button (click)="cancelMapping()">Cancel</button>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 15px; width: 150px;">Comment</th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 5px;">Mapped</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterMapped">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #FilterMapped="matMenu">
+                                <div style="padding: 8px;">
+                                    <select class="form-control" [(ngModel)]="filterMapped" (click)="$event.stopPropagation()" (change)="searchMapped()">
+                                        <option value="all">All</option>
+                                        <option value="checked">Checked</option>
+                                        <option value="unchecked">Unchecked</option>
+                                    </select>
+                                </div>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 45px;">Status</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="FilterStatus">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #FilterStatus="matMenu">
+                                <div style="padding: 8px;">
+                                    <input matInput style="width: 100%;" class="form-control" placeholder="Search Status" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm9" />
+                                </div>
+                                <mat-divider></mat-divider>
+                                <button mat-button (click)="searchStatus()">Filter</button>
+                                <button mat-button (click)="cancelStatus()">Cancel</button>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 5px;">Evolution</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="EvolutionFilter">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #EvolutionFilter="matMenu">
+                                <div style="padding: 8px;">
+                                    <select class="form-control" [(ngModel)]="filterEvolution" (click)="$event.stopPropagation()" (change)="searchEvolution()">
+                                        <option value="all">All</option>
+                                        <option value="checked">Checked</option>
+                                        <option value="unchecked">Unchecked</option>
+                                    </select>
+                                </div>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="font-size: 13px; width: 150px;">
+                        <div style="display: flex; align-items: center;">
+                            <span style="margin-right: 5px;">Version</span>
+                            <div style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="filterVersion">
+                                <i class="bi bi-funnel" style="font-size: 1.1rem;"></i>
+                            </div>
+                            <mat-menu #filterVersion="matMenu">
+                                <div style="padding: 8px;">
+                                    <input type="number" matInput style="width: 100%;" class="form-control" placeholder="Search version" (click)="$event.stopPropagation()" [(ngModel)]="searchTerm5" />
+                                </div>
+                                <mat-divider></mat-divider>
+                                <button mat-button (click)="searchByVersion()">Filter</button>
+                                <button mat-button (click)="cancelFilterField()">Cancel</button>
+                            </mat-menu>
+                        </div>
+                    </th>
+                    <th style="width: 150px;">Actions</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+               <ng-container *ngFor="let mapping of _taggedMappingList; let i=index">
+                  <tr [class.selected-row]="i === selectedRowIndex">
+                     <td>{{mapping.fieldNumber}}</td>
+                     <td (click)="selectedMapping(i, mapping, 2)">{{ mapping.tgt_Column_Name }}</td>
+                     <td>{{ mapping.tgt_Column_Description }}</td>
+                     <td>{{mapping.fileNameS}}</td>
+                     <td>{{mapping.src_Column_Name}}</td>
+                     <td>
+                      <input type="text"  cFormControl="cFormControl" [(ngModel)]="mapping.defaultvalue" />
+                     </td> 
+                     <td>
+                      <input class="form-check-input" type="checkbox" [(ngModel)]="mapping.is_Transco" />
+                     </td>
+                     <td>
+                      <select cSelect id="inputState" class="form-control" [(ngModel)]="mapping.transco_table" (change)="onTranscoSelectionChange($event)">
+                        <option *ngFor="let listTransco of transco" [value]="listTransco">{{ listTransco }}</option>
+                      </select>
+                     </td>
+                    <td>
+                      <!-- <div [innerHTML]="sanitizeHtml(mapping.mappingRule)"></div>
+                     <div class="d-flex justify-content-end">
+                       <mat-icon  (click)="openEditorDialog(mapping.mappingRule,i)" title="editor">keyboard_arrow_right</mat-icon>
+                     </div>    -->
+                     <select cSelect id="inputState" class="form-control" [(ngModel)]="mapping.mappingRule" (change)="onRuleSelectionChange($event)">
+                      <option *ngFor="let listRule of rulesList" [value]="listRule.rule">{{ listRule.rule }}</option>
+                    </select>
+                    </td>
+                     <td>
+                      <div [innerHTML]="sanitizeHtml(mapping.comment)"></div>
+                      <div class="d-flex justify-content-end">
+                        <mat-icon  (click)="openEditorDialogComment(mapping.comment,i)" title="editor">keyboard_arrow_right</mat-icon>
+                      </div>
+                      <!-- <textarea cols="30" rows="2"  cFormControl="form-control" [(ngModel)]="mapping.comment"></textarea> -->
+                     </td>
+                      <td>
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="mapping.mapped" />
+                      </td>
+                      <td> 
+                        <select cSelect id="inputState" class="form-control" [(ngModel)]="mapping.status">
+                        <option>Done</option>
+                        <option>Skipped</option>
+                        <option>ToDo</option>
+                        <option>ToReview</option>
+                      </select></td>
+                      <td>
+                        <input type="checkbox" class="form-check-input" [(ngModel)]="mapping.evolution" />
+                        </td>
+                       <td>
+                        <input type="number" cFormControl="form-control" [(ngModel)]="mapping.id_version" />
+                       </td>
+                 
+                       <td (click)="navigateToAction(mapping.id_Mapping)"><mat-icon>add_circle</mat-icon></td>
+                       <!-- <td (click)="navigateToAction(mapping.id_Mapping)">
+                        <mat-icon *ngIf="isMappingIdEqual()">add_circle</mat-icon>
+                        <mat-icon *ngIf="!isMappingIdEqual()">add_circle_outline</mat-icon>
+                      </td>-->
+                       <input type="hidden" [(ngModel)]="mapping.is_Mandatory" placeholder="user" />
+                       <input type="hidden" [(ngModel)]="mapping.last_Modification" placeholder="user" />
+                       <input type="hidden" [(ngModel)]="mapping.tgt_Column_Length" placeholder="user" />
+                       <input  type="hidden" [(ngModel)]="mapping.fileNameS" placeholder="user" />
+                       <input type="hidden" [(ngModel)]="mapping.comment" placeholder="user" />
+                       <input type="hidden" [(ngModel)]="mapping.project" placeholder="user" />
+                       <input type="hidden" [(ngModel)]="currentDate" readonly>
+                    </tr>
+               </ng-container>
+            </tbody>
+         </table>
+         </div>
+         <div class="d-flex justify-content-between">
+       
+          <button  (click)="SaveMapping()" class="btn btn-outline" style="background-color: #c2d28e;">Save</button>
+      </div>
+        </c-card-body>
+      
+      </c-card>
+    </c-col>
+  </div>
+
+ 
+  <c-col [sm]="1"  [ngClass]="{ 'sidebar-narrow': !isTableTargetOpen }">
+    <!-- <mat-icon class="mat-18" toggle="visible" cHeaderToggler (click)="toggleTargetTable()"> table_chart</mat-icon> -->
+    <c-card class="mb-4" [hidden]="!isTableTargetOpen">
+      <c-card-header ngPreserveWhitespaces="ngPreserveWhitespaces" >
+        <strong>Target Files</strong>
+      </c-card-header>
+      <c-card-body>
+        <div class="table-taille3">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>File Name</th>
+              <!-- <th>Status</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let fileName of getGroupedItemKeyTarget()">
+              <tr>
+                <td (click)="toggleGroupTarget(fileName)">{{ fileName }}</td>
+                <!-- <td>
+                  <select cSelect [(ngModel)]="selectedStatuses[fileName]" name="status">
+                    <option [value]="selectedStatuses[fileName]">{{ selectedStatuses[fileName] }}</option>
+                   <option value="Open">Open</option>
+                   <option value="InProgress">In Progress</option>
+                    <option value="Done">Done</option>
+                    </select>
+                </td> -->
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  </div>

@@ -1,0 +1,105 @@
+<c-col xs="12">
+    <c-card class="mb-3">
+      <c-card-header ngPreserveWhitespaces>
+        <strong>Actions</strong>
+      </c-card-header>
+      <c-card-body>
+        <c-nav variant="tabs">
+          <c-nav-item>
+            <a [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="0" cNavLink>
+              <svg cIcon class="me-2" name="cilHome"></svg>
+            List of Actions
+            </a>
+          </c-nav-item>
+          <c-nav-item>
+            <a [cTabContent]="tabContent1" [routerLink] [tabPaneIdx]="1" cNavLink>
+              <svg cIcon class="me-2" name="cilUser"></svg>
+          Add Action
+            </a>
+          </c-nav-item>
+        </c-nav>
+        <c-tab-content #tabContent1="cTabContent" [activeTabPaneIdx]="0" cRounded="bottom">
+          <c-tab-pane class="p-3 preview" role="tabpanel">
+           <!-- <app-list-of-actions></app-list-of-actions>             -->
+           <table [hover]="true" cTable>
+            <thead>
+            <tr>
+             <th scope="col">ID Action</th>
+             <th scope="col">Action</th>
+             <th scope="col">Actor</th>
+             <th scope="col">Date Creation</th>
+             <th scope="col">Due Date</th>
+             <th scope="col">External reference</th>
+             <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+             <tr *ngFor="let list of listAction">
+             <td>{{list.id_Action}}</td>
+             <td>{{list.action}}</td>
+             <td>{{list.actor.first_name}}</td>
+             <td>{{list.creation_Date | date: 'mediumDate'}}</td>
+             <td>{{list.end_Date | date: 'mediumDate'}}</td>
+             <td>{{list.external_ref}}</td>
+             <td>{{list.status}}</td>
+           </tbody>
+           </table>
+          </c-tab-pane>
+          <c-tab-pane class="p-3 preview" role="tabpanel">
+            <form cForm class="row g-3" [formGroup]="saveForm" (ngSubmit)="savingData(saveForm)">
+              <c-col md="12">
+                <label cLabel for="tgt_Column_Name">Target File</label>
+                <input *ngIf="mappingAction" cFormControl id="tgt_Column_Name" type="text" class="form-control"  [value]="mappingAction.fileNameT" disabled />
+              </c-col>
+              <c-col md="12" >
+                <label cLabel for="tgt_Column_Name">Column Name</label>
+                <input *ngIf="mappingAction" cFormControl id="tgt_Column_Name" class="form-control" type="text"  [value]="mappingAction.tgt_Column_Name" disabled />
+              </c-col>
+              <c-col md="12">
+                <label cLabel for="project_Name">Actor</label>
+                <select cSelect id="inputState" class="form-control" formControlName="actor" (change)="onActorSelectionChange($event)">
+                  <option *ngFor="let actor of listActor" [value]="actor.id_Actor">{{ actor.last_name }} {{ actor.first_name }}</option>
+                </select>
+              </c-col>
+                
+              <c-col md="3">
+                <label cLabel for="date_Creation">Creation Date</label>
+                <input type="date" placeholder="date_Creation" class="form-control" formControlName="creation_Date"  >
+              </c-col>
+              <c-col md="3">
+                <label cLabel for="date_Creation">Due Date</label>
+                <input type="date" placeholder="date_Creation" class="form-control" formControlName="end_Date"  />
+              </c-col>
+
+
+              <c-col md="12">
+                <label cLabel for="">External reference</label>
+                <input type="text" placeholder="external_ref" class="form-control" formControlName="external_ref"  />
+              </c-col>
+              
+              <c-col md="12">
+                <label cLabel for="inputState">Status</label>
+                <select cSelect id="inputState" class="form-control" formControlName="status">
+                  <option>Opened</option>
+                  <option>In progress</option>
+                  <option>Waiting for validation</option>
+                  <option>Closed</option>
+                  <option>Canceled</option>
+                </select>
+              </c-col>
+              <c-col md="12">
+                <label cLabel for="mappingRule">Description</label>
+                <textarea cFormControl id="mappingRule" formControlName="action" ></textarea>
+              </c-col>
+              <input type="hidden" [(ngModel)]="idMapping" />
+              <c-col xs="12">
+                <button  type="submit" class="btn btn-outline-success">Create Action</button>
+              </c-col>
+            </form>
+          </c-tab-pane>
+        </c-tab-content>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col xs="12">
+  </c-col>
